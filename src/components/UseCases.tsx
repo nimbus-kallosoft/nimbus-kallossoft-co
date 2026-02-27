@@ -1,5 +1,7 @@
 "use client";
 
+import { motion } from "framer-motion";
+
 const useCases = [
   {
     icon: "💻",
@@ -8,8 +10,8 @@ const useCases = [
     bullets: [
       "Describe the feature, get working code",
       "Semantic code search across 11k+ nodes",
-      "Automated testing & deployment",
-      "PR creation with description",
+      "Automated testing & PR creation",
+      "Deploy with one conversation",
     ],
     accent: "#a78bfa",
   },
@@ -21,7 +23,7 @@ const useCases = [
       "Browse, scrape & summarize sources",
       "Competitive analysis on demand",
       "Knowledge graph stores findings",
-      "Export to docs or slides",
+      "Export to docs or voice briefings",
     ],
     accent: "#60a5fa",
   },
@@ -31,7 +33,7 @@ const useCases = [
     title: "Run complex workflows hands-free",
     bullets: [
       "Schedule cron jobs with a sentence",
-      "WhatsApp / email pipelines",
+      "WhatsApp & email pipelines",
       "Monitor & alert on conditions",
       "Connect any tool via API",
     ],
@@ -45,7 +47,7 @@ const useCases = [
       "Blog posts, docs, copy — all styles",
       "AI image generation & editing",
       "Auto-post to channels",
-      "SEO optimization built in",
+      "Voice narration with Kokoro TTS",
     ],
     accent: "#f472b6",
   },
@@ -56,12 +58,22 @@ const useCases = [
     bullets: [
       "Vercel, Cloudflare, Docker management",
       "Infrastructure-as-conversation",
-      "Incident triage & root cause",
-      "Env & secrets management",
+      "Incident triage & root cause analysis",
+      "Env, secrets & repo management",
     ],
     accent: "#fbbf24",
   },
 ];
+
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as const } },
+};
 
 export default function UseCases() {
   return (
@@ -77,7 +89,13 @@ export default function UseCases() {
 
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6 }}
+        >
           <span
             className="tag-pill inline-block px-4 py-1.5 text-xs font-semibold uppercase tracking-widest mb-6"
             style={{ color: "#fbbf24" }}
@@ -92,31 +110,32 @@ export default function UseCases() {
             <span className="gradient-text">build with Nimbus?</span>
           </h2>
           <p className="text-lg max-w-xl mx-auto" style={{ color: "rgba(240,240,255,0.5)" }}>
-            From solo developers to teams — Nimbus adapts to how you work.
+            From solo developers to entire teams — Nimbus adapts to how you work.
           </p>
-        </div>
+        </motion.div>
 
         {/* Use case grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {useCases.map((uc, i) => (
-            <div
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+        >
+          {useCases.map((uc) => (
+            <motion.div
               key={uc.category}
-              className="rounded-2xl p-6 transition-all duration-300 group"
+              className="rounded-2xl p-6 transition-all duration-300"
               style={{
                 background: "rgba(255,255,255,0.02)",
                 border: "1px solid rgba(255,255,255,0.06)",
               }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.background = `${uc.accent}08`;
-                el.style.borderColor = `${uc.accent}33`;
-                el.style.transform = "translateY(-3px)";
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.background = "rgba(255,255,255,0.02)";
-                el.style.borderColor = "rgba(255,255,255,0.06)";
-                el.style.transform = "translateY(0)";
+              variants={cardVariants}
+              whileHover={{
+                background: `${uc.accent}08`,
+                borderColor: `${uc.accent}33`,
+                y: -3,
+                transition: { duration: 0.2 },
               }}
             >
               {/* Category header */}
@@ -149,16 +168,18 @@ export default function UseCases() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
           ))}
 
           {/* CTA card */}
-          <div
+          <motion.div
             className="rounded-2xl p-6 flex flex-col items-center justify-center text-center"
             style={{
               background: "linear-gradient(135deg, rgba(124,58,237,0.15), rgba(59,130,246,0.15))",
               border: "1px solid rgba(167,139,250,0.3)",
             }}
+            variants={cardVariants}
+            whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
           >
             <div className="text-4xl mb-4">✨</div>
             <h3 className="text-lg font-bold mb-2" style={{ color: "#f0f0ff" }}>
@@ -168,7 +189,7 @@ export default function UseCases() {
               Nimbus adapts to any task. If you can describe it, Nimbus can do it.
             </p>
             <span
-              className="text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-200 hover:scale-105 cursor-pointer"
+              className="text-sm font-semibold px-5 py-2.5 rounded-full cursor-pointer"
               style={{
                 background: "linear-gradient(135deg, #7c3aed, #3b82f6)",
                 color: "#fff",
@@ -176,8 +197,8 @@ export default function UseCases() {
             >
               Get started →
             </span>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

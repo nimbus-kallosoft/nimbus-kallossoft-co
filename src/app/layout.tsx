@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Nimbus — Your AI Operating Environment",
     description:
-      "8 specialist agents working in concert so you don't have to think about it.",
+      "Voice, code, browser automation, image generation, knowledge graph, and multi-agent orchestration — all wired together in one AI OS.",
     type: "website",
     url: "https://nimbus.kallossoft.co",
     siteName: "Nimbus",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Nimbus — Your AI Operating Environment",
     description:
-      "8 specialist agents working in concert so you don't have to think about it.",
+      "Voice, code, browser automation, image generation, knowledge graph, and multi-agent orchestration — all wired together in one AI OS.",
   },
   icons: {
     icon: "/favicon.ico",

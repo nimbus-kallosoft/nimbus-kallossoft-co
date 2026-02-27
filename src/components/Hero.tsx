@@ -1,70 +1,109 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Sparkles, Zap, ArrowDown } from "lucide-react";
+
+const capabilities = [
+  "Voice Conversations",
+  "Browser Automation",
+  "Code Intelligence",
+  "Multi-Agent AI",
+  "Image Generation",
+  "Knowledge Graph",
+  "WhatsApp & Email",
+  "Infrastructure",
+  "Cron & Scheduling",
+  "macOS Integration",
+];
 
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 hero-bg grid-bg overflow-hidden">
       {/* Animated orbs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div
-          className="absolute w-96 h-96 rounded-full blur-3xl animate-pulse-glow"
+        <motion.div
+          className="absolute w-96 h-96 rounded-full blur-3xl"
           style={{
-            background: "radial-gradient(circle, rgba(167,139,250,0.15) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(167,139,250,0.18) 0%, transparent 70%)",
             top: "10%",
             left: "10%",
           }}
+          animate={{ opacity: [0.4, 1, 0.4], scale: [1, 1.05, 1] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         />
-        <div
-          className="absolute w-80 h-80 rounded-full blur-3xl animate-pulse-glow"
+        <motion.div
+          className="absolute w-80 h-80 rounded-full blur-3xl"
           style={{
-            background: "radial-gradient(circle, rgba(96,165,250,0.12) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(96,165,250,0.14) 0%, transparent 70%)",
             bottom: "15%",
             right: "10%",
-            animationDelay: "1.2s",
           }}
+          animate={{ opacity: [0.4, 1, 0.4], scale: [1, 1.08, 1] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
         />
-        <div
-          className="absolute w-64 h-64 rounded-full blur-3xl animate-pulse-glow"
+        <motion.div
+          className="absolute w-64 h-64 rounded-full blur-3xl"
           style={{
             background: "radial-gradient(circle, rgba(52,211,153,0.1) 0%, transparent 70%)",
             top: "50%",
             right: "25%",
-            animationDelay: "0.6s",
           }}
+          animate={{ opacity: [0.3, 0.8, 0.3] }}
+          transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
         />
       </div>
 
       {/* Badge */}
-      <div className="relative z-10 mb-8 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
+      <motion.div
+        className="relative z-10 mb-8"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
+      >
         <span className="tag-pill inline-flex items-center gap-2 px-4 py-2 text-sm font-medium" style={{ color: "#a78bfa" }}>
-          <Sparkles size={14} className="animate-pulse-glow" />
-          AI Operating Environment
+          <Sparkles size={14} />
+          AI Operating System
         </span>
-      </div>
+      </motion.div>
 
       {/* Main headline */}
-      <div className="relative z-10 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+      <motion.div
+        className="relative z-10"
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.2 }}
+      >
         <h1 className="text-7xl sm:text-8xl md:text-9xl font-black tracking-tighter mb-6 leading-none">
           <span className="gradient-text">Nimbus</span>
         </h1>
-      </div>
+      </motion.div>
 
       {/* Subheadline */}
-      <div className="relative z-10 animate-fade-in-up" style={{ animationDelay: "0.35s" }}>
-        <p className="text-xl sm:text-2xl md:text-3xl font-light max-w-2xl mb-4 leading-relaxed" style={{ color: "rgba(240,240,255,0.75)" }}>
+      <motion.div
+        className="relative z-10"
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.35 }}
+      >
+        <p className="text-xl sm:text-2xl md:text-3xl font-light max-w-2xl mb-4 leading-relaxed" style={{ color: "rgba(240,240,255,0.8)" }}>
           Your AI companion that{" "}
-          <span style={{ color: "#a78bfa", fontWeight: 500 }}>thinks</span>,{" "}
-          <span style={{ color: "#60a5fa", fontWeight: 500 }}>coordinates</span>, and{" "}
-          <span style={{ color: "#34d399", fontWeight: 500 }}>executes</span>
+          <span style={{ color: "#a78bfa", fontWeight: 500 }}>codes</span>,{" "}
+          <span style={{ color: "#60a5fa", fontWeight: 500 }}>automates</span>,{" "}
+          <span style={{ color: "#34d399", fontWeight: 500 }}>creates</span>, and{" "}
+          <span style={{ color: "#f472b6", fontWeight: 500 }}>connects</span>
         </p>
         <p className="text-base sm:text-lg max-w-xl mx-auto" style={{ color: "rgba(240,240,255,0.45)" }}>
-          8 specialist agents working in concert — so you don&apos;t have to think about it.
+          A complete AI operating environment — voice, vision, code, automation, and memory, all wired together.
         </p>
-      </div>
+      </motion.div>
 
       {/* CTA */}
-      <div className="relative z-10 flex flex-col sm:flex-row gap-4 mt-10 animate-fade-in-up" style={{ animationDelay: "0.5s" }}>
+      <motion.div
+        className="relative z-10 flex flex-col sm:flex-row gap-4 mt-10"
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.5 }}
+      >
         <a
           href="#capabilities"
           className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-sm transition-all duration-300 hover:scale-105"
@@ -84,42 +123,44 @@ export default function Hero() {
         >
           How it works
         </a>
-      </div>
+      </motion.div>
 
-      {/* Agent orbit visualization */}
-      <div className="relative z-10 mt-16 animate-fade-in-up" style={{ animationDelay: "0.65s" }}>
+      {/* Capability ticker */}
+      <motion.div
+        className="relative z-10 mt-16"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.65 }}
+      >
         <div className="flex flex-wrap justify-center gap-3 max-w-lg">
-          {[
-            "🧠 Planner",
-            "💻 Coder",
-            "🎤 Voice",
-            "🌐 Browser",
-            "📊 Data",
-            "🔍 Research",
-            "📁 Files",
-            "🚀 Deploy",
-          ].map((agent, i) => (
-            <span
-              key={agent}
-              className="text-xs px-3 py-1 rounded-full font-mono animate-fade-in-up"
+          {capabilities.map((cap, i) => (
+            <motion.span
+              key={cap}
+              className="text-xs px-3 py-1 rounded-full font-mono"
               style={{
                 background: "rgba(255,255,255,0.04)",
                 border: "1px solid rgba(255,255,255,0.08)",
                 color: "rgba(240,240,255,0.5)",
-                animationDelay: `${0.7 + i * 0.05}s`,
-                opacity: 0,
               }}
+              initial={{ opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.7 + i * 0.05 }}
             >
-              {agent}
-            </span>
+              {cap}
+            </motion.span>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float" style={{ color: "rgba(240,240,255,0.25)" }}>
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        style={{ color: "rgba(240,240,255,0.25)" }}
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+      >
         <ArrowDown size={20} />
-      </div>
+      </motion.div>
     </section>
   );
 }

@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { MessageCircle, Cpu, CheckCircle2 } from "lucide-react";
 
 const steps = [
@@ -14,7 +17,7 @@ const steps = [
     icon: <Cpu size={28} />,
     number: "02",
     title: "Nimbus plans",
-    desc: "The orchestrator breaks your request into subtasks, picks the right specialists, and sequences the work — automatically.",
+    desc: "The orchestrator breaks your request into subtasks, picks the right tools and agents, and sequences the work — automatically.",
     detail: "Orchestration · Planning · Context",
     color: "#60a5fa",
     glow: "rgba(96,165,250,0.2)",
@@ -30,6 +33,16 @@ const steps = [
   },
 ];
 
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.15 } },
+};
+
+const stepVariants = {
+  hidden: { opacity: 0, y: 32 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const } },
+};
+
 export default function HowItWorks() {
   return (
     <section id="how-it-works" className="relative py-28 px-4 overflow-hidden">
@@ -44,7 +57,13 @@ export default function HowItWorks() {
 
       <div className="relative z-10 max-w-5xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-20">
+        <motion.div
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6 }}
+        >
           <span
             className="tag-pill inline-block px-4 py-1.5 text-xs font-semibold uppercase tracking-widest mb-6"
             style={{ color: "#34d399" }}
@@ -61,7 +80,7 @@ export default function HowItWorks() {
           <p className="text-lg max-w-xl mx-auto" style={{ color: "rgba(240,240,255,0.5)" }}>
             The magic is in the coordination. You focus on what you want — Nimbus handles the how.
           </p>
-        </div>
+        </motion.div>
 
         {/* Steps */}
         <div className="relative">
@@ -71,21 +90,32 @@ export default function HowItWorks() {
             style={{ width: "calc(100% - 200px)" }}
           />
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-6">
+          <motion.div
+            className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-6"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+          >
             {steps.map((step, i) => (
-              <div key={step.number} className="relative flex flex-col items-center text-center group">
+              <motion.div
+                key={step.number}
+                className="relative flex flex-col items-center text-center group"
+                variants={stepVariants}
+              >
                 {/* Step number bubble */}
-                <div
-                  className="relative z-10 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110"
+                <motion.div
+                  className="relative z-10 w-16 h-16 rounded-2xl flex items-center justify-center mb-6"
                   style={{
                     background: `radial-gradient(circle, ${step.glow}, rgba(5,5,16,0.5))`,
                     border: `1px solid ${step.color}44`,
                     color: step.color,
                     boxShadow: `0 0 24px ${step.glow}`,
                   }}
+                  whileHover={{ scale: 1.12, transition: { duration: 0.2 } }}
                 >
                   {step.icon}
-                </div>
+                </motion.div>
 
                 {/* Step number label */}
                 <div
@@ -127,13 +157,19 @@ export default function HowItWorks() {
                     ↓
                   </div>
                 )}
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
-        {/* Example prompt */}
-        <div className="mt-20 max-w-2xl mx-auto">
+        {/* Example prompt terminal */}
+        <motion.div
+          className="mt-20 max-w-2xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
           <div
             className="rounded-2xl p-6 font-mono text-sm"
             style={{
@@ -151,16 +187,16 @@ export default function HowItWorks() {
               <span style={{ color: "#a78bfa" }}>you</span>
               <span style={{ color: "rgba(240,240,255,0.2)" }}> &gt; </span>
               <span style={{ color: "#f0f0ff" }}>
-                &ldquo;Research the top 5 React component libraries, create a comparison doc, and post a summary to our team Slack.&rdquo;
+                &ldquo;Research the top 5 React libraries, create a comparison doc, and send a summary to my WhatsApp.&rdquo;
               </span>
             </p>
             <p className="mt-3" style={{ color: "rgba(240,240,255,0.4)" }}>
               <span style={{ color: "#34d399" }}>nimbus</span>
               <span style={{ color: "rgba(240,240,255,0.2)" }}> &gt; </span>
-              <span>Dispatching research agent... browser agent... writer agent... Done in 47s ✓</span>
+              <span>Dispatching research agent... browser agent... writer agent... WhatsApp sent ✓ Done in 52s</span>
             </p>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
