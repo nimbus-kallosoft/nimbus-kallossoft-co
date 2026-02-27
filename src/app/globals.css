@@ -125,3 +125,15 @@ body {
 .step-line {
   background: linear-gradient(90deg, rgba(167,139,250,0), rgba(167,139,250,0.4), rgba(96,165,250,0.4), rgba(96,165,250,0));
 }
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
